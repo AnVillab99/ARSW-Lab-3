@@ -5,7 +5,8 @@ import java.util.List;
 
 public class PrimeFinderThread extends Thread {
 
-	int a, b;
+	int a,b;
+	boolean sleep;
 
 	private List<Integer> primes;
 
@@ -18,13 +19,23 @@ public class PrimeFinderThread extends Thread {
 
 	@Override
 	public void run() {
-
 		for (int i = a; i < b; i++) {
-			if (isPrime(i)) {
-				primes.add(i);
-				// System.out.println(i);
+			if(sleep) {
+				try {
+					dormir();
+					this.wait();
+					System.out.println("dormido");
+				}
+				catch(Exception e) {System.out.println(e);}
+			}
+			else {
+				if (isPrime(i)) {
+					//System.out.println(i);
+					primes.add(i);
+				}
 			}
 		}
+		
 
 	}
 
@@ -51,6 +62,14 @@ public class PrimeFinderThread extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void dormir(boolean b) {
+		sleep=b;
+	}
+	
+	public int hallados() {
+		return primes.size();
 	}
 
 }
