@@ -9,8 +9,10 @@
     1.  Create 3 threads of type `CountThread`, assigning the first interval [0..99], the second [99..199], and the third [200..299].
         
     2.  Start the three threads with `start()`. Run and check the output on the screen.
+    ![imagen 1 del counThread con run](images/counThreadR)
+    ![imagen 1 del counThread con start](images/counThreadS)
         
-    3.  Change the beginning with `start()` to `run()`. How does the output change? Why?
+    4.  Change the beginning with `start()` to `run()`. How does the output change? Why?
 	    > If we use the method `start()`, it creates a new Thread and then it executes the method `run()` from the thread, if we use `run()` no new thread is created and only execute this method
 ### # Part II - Black List Search Exercise
 
@@ -46,27 +48,3 @@ From the above, implement the following sequence of experiments to perform the v
 -   How does the solution behave using as many processing threads as cores compared to the result of using twice as much?
     
 -   According to the above, if for this problem instead of 100 threads in a single CPU could be used 1 thread in each of 100 hypothetical machines, Amdahls law would apply better ?. If **x** threads are used instead of **100/x** distributed machines (where **x** is the number of cores of these machines), would it be improved? Explain your answer.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
