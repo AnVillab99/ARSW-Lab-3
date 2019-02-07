@@ -52,9 +52,7 @@ public class Control extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println( System.currentTimeMillis() +"                 sumado:"+ ( System.currentTimeMillis()+5000));
 		
-		//if( System.currentTimeMillis()<System.currentTimeMillis()+5000) {System.out.println("el thread ");}
 		for (int i = 0; i < NTHREADS; i++) {
 			pft[i].start();
 		}
@@ -63,39 +61,45 @@ public class Control extends Thread {
 		long maxT = System.currentTimeMillis() + TMILISECONDS;
 
 		while (!terminaron) {
-			
+
 			if (System.currentTimeMillis() >= maxT) {
-				System.out.println("el thread ");
+				
 				for (int i = 0; i < NTHREADS; i++) {
-					
-					
+
 					System.out.println("el thread " + i + " ha hallado " + pft[i].hallados() + " primos");
-					pft[i].dormir(true);
-					//pft[i].dormir();
+
+					pft[i].dormir();
+
+					
+					
+
 				}
 				boolean enter = true;
 				while (enter) {
 					System.out.println("oprima enter para continuar");
-					if (sc.nextLine().equals("n")) {
+					if (sc.nextLine().equals("")) {
 
 						for (int i = 0; i < pft.length; i++) {
-							pft[i].dormir(false);
+							
+							//pft[i].notify();
+							pft[i].awake();
 						}
-						synchronized (this){this.notifyAll();}
+
 						maxT = System.currentTimeMillis() + TMILISECONDS;
 					}
-					enter=false;
+					enter = false;
+					break;
 				}
 
 			}
-			else if(System.currentTimeMillis() >=  maxT && terminaron) {
-        		for (int i = 0; i < pft.length; i++) System.out.println("el thread " + i+" ha encontrado "+pft[i].hallados()+" primos");
-        		System.out.println("ya acabamos");
-        		System.exit(0);
-}
-			
-
+			yaT();
 		}
+
+		for (int i = 0; i < pft.length; i++) {
+			System.out.println("el thread " + i + " ha encontrado " + pft[i].hallados() + " primos");
+		}
+		System.out.println("fin");
+		System.exit(0);
 	}
 
 }
