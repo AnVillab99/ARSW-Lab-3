@@ -107,15 +107,19 @@ Part 3[](#part-3)
     
     1.  Possible race conditions
 	    >* More than 1 snake trying to eat a mice at the same time
+	    >* 2 heads of snakes try to be in the same position
         
     2.  An incorrect or inappropriate use of collections, considering its concurrent handling(For this increase the game speed and execute it multiples times until an error has been raised).
+    > appeard 2 errors when raising the game speed java.util.ConcurrentModificationException and java.lang.NullPointerException, this because, java try to access a cell where there where 2 heads of sanke because of a non syncronized method
+
         
-    3.  Unnecessary use of active waits
+    4.  Unnecessary use of active waits
         
     
 3.  Identify critical regions associated with race conditions, and do something in order to eliminate them.Note that you have to synchronize strictly needed. In the answers document suggest the solution proposed for each item of the point 2. As the same way note that you don´t have to add more race conditions
+> it may be fix with Collections.synchronizedList(new LinkedList());
     
-4.  As you can see, the game is incomplete. Write code in order to implement functionallities through buttons in the GUI to start / Pause / Resume the game: start the game if it has not started, Pause the game if it is on, Resume the game if it is suspended. Keep in mind:
+5.  As you can see, the game is incomplete. Write code in order to implement functionallities through buttons in the GUI to start / Pause / Resume the game: start the game if it has not started, Pause the game if it is on, Resume the game if it is suspended. Keep in mind:
     
     1.  When the game has been paused, in some point of the screen you have to show
         

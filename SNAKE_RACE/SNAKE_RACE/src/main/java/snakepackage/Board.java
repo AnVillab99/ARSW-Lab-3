@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;

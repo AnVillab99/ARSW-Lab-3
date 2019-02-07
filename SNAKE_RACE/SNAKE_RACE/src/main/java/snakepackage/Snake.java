@@ -1,5 +1,6 @@
 package snakepackage;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Random;
@@ -51,6 +52,7 @@ public class Snake extends Observable implements Runnable {
 
     public void run() {
         while (!snakeEnd) {
+        
             
             snakeCalc();
 
