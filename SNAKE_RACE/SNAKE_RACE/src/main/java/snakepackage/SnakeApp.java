@@ -2,6 +2,8 @@ package snakepackage;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
@@ -20,6 +22,9 @@ import javax.swing.JPanel;
 public class SnakeApp {
 
     private static SnakeApp app;
+    private JButton start;
+    private JButton pause;
+    private JButton resume;
     public static final int MAX_THREADS = 8;
     Snake[] snakes = new Snake[MAX_THREADS];
     private static final Cell[] spawn = {
@@ -49,13 +54,16 @@ public class SnakeApp {
         frame.setLocation(dimension.width / 2 - frame.getWidth() / 2,
                 dimension.height / 2 - frame.getHeight() / 2);
         board = new Board();
+        crearBotones();
         
         
         frame.add(board,BorderLayout.CENTER);
         
         JPanel actionsBPabel=new JPanel();
         actionsBPabel.setLayout(new FlowLayout());
-        actionsBPabel.add(new JButton("Action "));
+        actionsBPabel.add(start);
+        actionsBPabel.add(pause);
+        actionsBPabel.add(resume);
         frame.add(actionsBPabel,BorderLayout.SOUTH);
 
     }
@@ -63,6 +71,39 @@ public class SnakeApp {
     public static void main(String[] args) {
         app = new SnakeApp();
         app.init();
+    }
+    
+    private void crearBotones() {
+    	start = new JButton("Start");
+		pause = new JButton("Pause");
+		resume = new JButton("Resume");
+		ActionListener s = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i != MAX_THREADS; i++) {
+					snakes[i].setMove(true);
+				}
+				start.setEnabled(false);
+			}
+		};
+
+		ActionListener p = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i != MAX_THREADS; i++) {
+					snakes[i].setPausa(true);
+				}
+			}
+		};
+
+		ActionListener r = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i != MAX_THREADS; i++) {
+					snakes[i].setPausa(false);
+				}
+			}
+		};
+		start.addActionListener(s);
+		pause.addActionListener(p);
+		resume.addActionListener(r);
     }
 
     private void init() {

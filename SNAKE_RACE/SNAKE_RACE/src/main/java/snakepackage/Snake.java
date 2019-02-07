@@ -26,11 +26,15 @@ public class Snake extends Observable implements Runnable {
     private boolean isSelected = false;
     private int growing = 0;
     public boolean goal = false;
+    private boolean moviendose;
+    private boolean pausa;
 
     public Snake(int idt, Cell head, int direction) {
         this.idt = idt;
         this.direction = direction;
         generateSnake(head);
+        moviendose=false;
+        pausa=true;
 
     }
 
@@ -341,5 +345,31 @@ public class Snake extends Observable implements Runnable {
     public int getIdt() {
         return idt;
     }
+
+	public synchronized void setMove(boolean b) {
+		moviendose = b;
+		if (b) {
+		
+			this.notifyAll();
+
+		}
+		
+	}
+	
+	public synchronized void setPausa(boolean b) {
+		pausa = b;
+		if (b) {
+			
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		else {this.notifyAll();}
+		
+	}
 
 }
